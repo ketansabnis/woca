@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.4'
+ruby '2.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2', '>= 5.2.2.1'
@@ -93,6 +93,23 @@ gem 'graphviz_aasm'
 gem 'whenever', :require => false
 gem 'asset_sync'
 gem 'phonelib'
+gem 'bootstrap'
+gem 'jquery-rails'
 gem 'bootstrap-email'
 gem 'mailgun-ruby'
 gem 'humanize', require: 'humanize'
+gem 'mongoid-autoinc'
+
+group :test, :development do
+  gem 'faker', github: 'stympy/faker'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '3.1.2'
+  gem "factory_bot_rails"
+end
+
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec-sidekiq'
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
+end
