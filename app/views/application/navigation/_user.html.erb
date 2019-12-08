@@ -1,0 +1,18 @@
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="javascript:;">Test</a>
+    </li>
+    </ul>
+    <ul class="navbar-nav ml-md-auto">
+    <li class="nav-item dropdown show">
+        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <%= t('welcome', name: current_user.first_name ) %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+        <%= link_to t('controller.users.profile.link_name', role: User.human_attribute_name("role.#{current_user.role}")), "#", class: "dropdown-item modal-remote-form-link" %>
+        <%= link_to t('controller.users.change_password.link_name'), "#", class: "dropdown-item modal-remote-form-link" %>
+        <div class="dropdown-divider"></div>
+        <%= link_to t('sign_out', scope: "devise"), destroy_session_path(current_user), class: "dropdown-item", method: :delete %>
+        </div>
+    </li>
+</ul>

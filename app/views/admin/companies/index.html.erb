@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="card mb-3">
+      <div class="card-header">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-4 col-sm-auto d-flex align-items-center pr-0">
+            <h3 class="black mb-0 text-nowrap">
+              <%= Company.model_name.human(count: @companies.total_entries) %>
+              <small>(<%= @companies.total_entries %> entries found)</small>
+            </h3>
+          </div>
+          <div class="col-8 col-sm-auto ml-auto text-right pl-0">
+            <div id="dashboard-actions">
+              <% if policy([:admin, Company.new]).create? %>
+                <%= link_to "#{icon("fas", "plus")} #{t('controller.companies.new.link_name')}".html_safe, new_admin_company_path, class: "btn btn-sm modal-remote-form-link" %>
+              <% end %>
+              <% if policy([:admin, Company.new]).create? %>
+                <% label = "#{icon("fas", "external-link-alt")} #{t('controller.companies.export.link_name', name: t('global.all'))}".html_safe %>
+                <%= link_to label, export_admin_companies_path, class: 'btn btn-sm' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <%= render "admin/companies/index", companies: @companies %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3 class="black mb-0 text-nowrap py-2 py-xl-0">Filters</div>
+      </div>
+      <div class="card-body p-0">
+        <%= render "filters" %>
+      </div>
+    </div>
+  </div>
+</div>

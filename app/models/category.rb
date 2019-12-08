@@ -4,10 +4,14 @@ class Category
   include ArrayBlankRejectable
   
   field :name, type: String
+  field :description, type: String
   field :slug, type: String
-  field :status, type: String
+  field :status, type: String, default: 'active'
 
   has_many :products
+  belongs_to :category, optional: true
+  has_and_belongs_to_many :restaurants
+  has_one :asset, as: :assetable
 
   validates :name, :status, presence: true
   validates :name, uniqueness: true, allow_blank: true

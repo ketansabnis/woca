@@ -13,14 +13,18 @@ class Restaurant
     field :restaurant_code, type: String
     field :status, type: String
     field :description, type: String
+    field :web_domain, type: Array, default: []
 
     has_many :users
     has_one :restaurant_setting
     has_many :restaurant_open_hours, class_name: 'RestaurantOpenHours'
-    has_one :address
+    has_one :address, as: :addressable
     has_one :logo, class_name: 'Asset', as: :assetable
+    belongs_to :company, optional: true
+    has_and_belongs_to_many :categories
+    has_and_belongs_to_many :products
     
-    validates :name, :status, presence: true
+    validates :name, :status, :address, presence: true
     validates :name, length: {minimum: 4}
     validates :phone, allow_blank: true, phone: { possible: true, types: [:voip, :personal_number, :fixed_or_mobile]}
     validates :status, inclusion: {in: Proc.new{ Restaurant.available_statuses.collect{|x| x[:id]} } }, allow_blank: true

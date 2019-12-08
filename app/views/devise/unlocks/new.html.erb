@@ -1,0 +1,25 @@
+<section class="auth login-page">
+  <div class="container no-pd">
+    <div class="col-lg-5 col-xs-12 col-md-12 col-sm-12 no-pd">
+      <div class="login-form-wrapper pt-5">
+        <p class="p-style">Resend unlock instructions</p>
+
+          <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), method: :post, html: { novalidate: false, class: 'validate-form' }) do |f| %>
+
+            <%= f.input :email, autofocus: true, autocomplete: false, as: :email %>
+
+            <div class="signin-btn col-lg-12 pl-0 pr-0 pt-3 pb-3">
+              <%= f.submit "Resend unlock instructions", class: 'sign-in-btn' %>
+            </div>
+          <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</section>
+<%= javascript_tag do %>
+  $(document).ready(function(){
+    $('section.login-page').css('height', $( window ).height() - $('section.login-page').offset().top );
+    FormInitializer.init($("#confirmation_form"));
+  });
+<% end %>

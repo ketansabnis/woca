@@ -10,10 +10,16 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require mailer
- *= require owl.carousel
- *= require owl.theme.default
- *= require theme-main
- *= require_tree .
+ *= require app
+ *= require noty
+ *= require noty_theme
+ *= require bootstrap-datetimepicker
+ *= require daterangepicker
+ *= require intlTelInput
+ *= require selectize
+ *= require animate
+ *= require sidebar-modal
+ *= require jquery.fileupload
+ *= require files-list
  *= require_self
- */
+*/

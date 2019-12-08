@@ -1,0 +1,23 @@
+// @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700');
+
+// override bootstrap varialbes start
+// $font-size-base: 1.125rem;
+$body-bg: #fefefe;
+$body-color: #495057;
+$primary: #1976D2;
+$success: #56b654;
+$info: #00BCD4;
+$warning: #FFC107;
+$danger: #F44336;
+$dark: #666;
+$font-family-base: "Poppins", Helvetica, Arial, sans-serif !default;
+$dropdown-link-color: #343a40;
+$btn-focus-box-shadow: none !important;
+$border-radius: 4px;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$breadcrumb-divider: "\f3d3";
+$modal-backdrop-opacity: 0.9 !default;
+$modal-backdrop-bg: #5a6775;
+// override bootstrap varialbes end

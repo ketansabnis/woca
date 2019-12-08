@@ -1,0 +1,104 @@
+@import "bootstrap/functions";
+@import "bootstrap/mixins";
+@import 'bootstrap/variables';
+
+// Add "left" or "right" in modal parent div, after class="modal"
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+  position: fixed;
+  margin: auto;
+  height: 100%;
+  -webkit-transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  -o-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+  padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left .modal-dialog {
+  left: 0;
+  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+  transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.in .modal-dialog {
+  left: 0;
+}
+
+// right
+.modal.right .modal-dialog {
+  right: 0;
+  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+  transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.in .modal-dialog {
+  right: 0;
+}
+
+// modal style
+.modal-content {
+  border-radius: 0;
+  border: none;
+}
+
+.modal-header, .modal-footer {
+  padding: calc(#{$grid-gutter-width} / 3) calc(#{$grid-gutter-width} / 2) calc(#{$grid-gutter-width} / 3) calc(#{$grid-gutter-width} / 2);
+
+  .modal-title {
+    font-weight: 300;
+  }
+}
+
+// Scale up the modal
+@include media-breakpoint-up(sm) {
+  .modal-sm { width: $modal-sm; }
+}
+@include media-breakpoint-up(md) {
+  .modal-md { width: $modal-md; }
+}
+@include media-breakpoint-up(lg) {
+  .modal-lg { width: $modal-lg; }
+}
+
+.modal.right.fixed-header-footer, .modal.left.fixed-header-footer{
+  .modal-header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 1px;
+    background-color: $white;
+    z-index: 1030;
+  }
+  .modal-footer{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 1px;
+    background-color: $white;
+    z-index: 1030;
+  }
+  .modal-body{
+    margin-top: 50px;
+  }
+}
+
+.fixed-top-modal.modal.left .modal-body,
+.fixed-top-modal.modal.right .modal-body{
+  padding-top: $grid-gutter-width;
+}

@@ -1,33 +1,301 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  currency:
+    indian: '₹'
+    default: '&#8377;'
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %I:%M %p"
+  date_time:
+    formats:
+      default: "%d/%m/%Y %I:%M %p"
+  welcome: Welcome %{name}
+  global:
+    all: All
+    at: 'At'
+    action:
+      one: Action
+      other: Actions
+    active_filter: Active Filter
+    custom: 'More'
+    change: 'Change'
+    dashboard: Dashboard
+    disclaimer: Disclaimer
+    default_account_name: Default Account will be considered
+    gallery: "Gallery"
+    i_agree: I Agree
+    previous: Previous
+    next: Next
+    _no: 'No'
+    not_sync_yet: 'Not Synced'
+    not_generated: 'Not Generated'
+    otp: "OTP"
+    overview: 'Overview'
+    total: 'Total'
+    boolean:
+      :true: 'Yes'
+      :false: 'No'
+
+  helpers:
+    show:
+      link_name: '%{model} Details'
+    edit:
+      link_name: 'Edit %{model}'
+    new:
+      link_name: 'Add %{model}'
+    destroy:
+      link_name: 'Destroy %{model}'
+    select:
+      prompt: Please select
+    submit:
+      create: Add %{model}
+      update: Update %{model}
+      submit: Save %{model}"
+      post:
+        create: Upload %{model}
+
+  language:
+    en: 'English'
+    mr: 'मराठी'
+
+  mongoid:
+    models:
+      asset:
+        one: Document
+        other: Documents
+      address:
+        one: Address
+        other: Addresses
+      data_attribute:
+        one: Date
+        other: Data
+      email:
+        one: Email
+        other: Emails
+      note:
+        one: Note
+        other: Notes
+      search:
+        one: Search
+        other: Searches
+      sms:
+        one: SMS
+        other: SMSs
+      template:
+        one: Template
+        other: Templates
+      user:
+        one: User & Customer
+        other: Users & Customers
+
+    attributes:
+      checklist:
+        name: 'Name'
+        key: 'Key'
+        description: 'Description'
+        tracked_by: 'Tracked By'
+        order: 'Order'
+      asset:
+        assetable_id: Assetable ID
+        assetable_type: Assetable Type
+        file: File
+        file_size: 'Size'
+        file_name: 'Name'
+        asset_type: 'Type'
+      address:
+        address1: 'Address'
+        address2: 'Street'
+        city: 'City'
+        country: 'Country'
+        state: 'State / Region'
+        zip: 'Zip / Pin Code'
+
+      sms:
+        to: 'To'
+        cc: 'Cc'
+        sent_on: 'Sent On'
+        subject: 'Subject'
+        body: 'Body'
+        status: 'Status'
+        content: Content
+      sms/status:
+        received: Received
+        untracked: Untracked
+        scheduled: Scheduled
+        sent: Sent
+        failed: Failed
+      company:
+        name: 'Name'
+        industry: 'Industry'
+        name_industry: 'Name & Industry'
+        company_code: 'Code'
+        status: 'Status'
+        company_code_status: 'Code & Status'
+        company_users: 'Members'
+        restaurants: 'Restaurants'
+        company_users_restaurants: 'Members & Restaurants'
+      user:
+        confirmation: 'Confirmation'
+        created_at: "Registered At"
+        confirmed_at: 'Confirmed'
+        confirmed_by: 'Confirmed By'
+        confirmed: "Confirmed"
+        company_name: 'Company Name'
+        email: 'Email'
+        login_otp: 'Verification / Login OTP'
+        name: 'Name'
+        name_email_phone: 'Name/Email/Phone'
+        phone: 'Phone'
+        password: 'Password'
+        password_confirmation: 'Password Confirmation'
+        role: 'Role'
+        remember_me: "<span>Keep me logged in</span>"
+        registered_at: 'Registered at'
+        referred_by_id: 'Referred by'
+        referral_code: 'Referral Code'
+        status: 'Status'
+        time_zone: "User's Time Zone"
+        utm_params: 'UTM Tracking'
+      user/confirmed:
+        :true: 'Confirmed'
+        :false: 'Not Confirmed'
+      user/role:
+        admin: 'Administrator'
+        crm: 'CRM User'
+        pos: 'POS'
+        pos_manager: 'POS Manager'
+        company_admin: 'Company Administrator'
+        user:
+          zero: 'Customer'
+          one: 'Customer'
+          other: 'Customers'
+
+  controller:
+    assets:
+      index:
+        link_name: 'Documents'
+    application:
+      set_current_restaurant: 'The site is under maintenance. Please contact your  administrator.'
+      invalid: 'Invalid'
+    restaurants:
+      new:
+        link_name: 'Add Restaurant'
+      edit:
+        link_name: 'Edit Restaurant'
+      show:
+        link_name: 'Restaurant Detail'
+      index:
+        link_name: 'Restaurants'
+    companies:
+      new:
+        link_name: 'Add Company'
+        header: 'Add Company'
+      edit:
+        link_name: 'Edit'
+        header: 'Edit %{company_name}'
+      show:
+        link_name: 'Company Detail'
+      index:
+        link_name: 'Companies'
+      export:
+        link_name: 'Export'
+    dashboard:
+      index:
+        link_name: 'Dashboard'
+      receipt_frequency: 'Payment Frequency'
+    emails:
+      index:
+        link_name: 'Emails'
+      show:
+        link_name: Details
+    only_administrator_users: 'Only administrator users are allowed.'
+    only_buyer_users: 'Only Buyer users are allowed.'
+    notes:
+      new:
+        header: 'Add Note'
+        link_name: 'Add Note'
+    templates:
+      index:
+        link_name: 'Templates'
+      show:
+        link_name: Template Detail
+
+    users:
+      account_confirmed: 'Account Confirmed'
+      change_password:
+        link_name: 'Change Password'
+      cannot_confirm_user: 'Cannot confirm user'
+      confirm_user:
+        link_name: 'Confirm User'
+      confirm_via_otp:
+        link_name: 'Confirm Via OTP'
+      exports:
+        link_name: '%{name} Exports'
+      edit:
+        link_name: "Edit %{role}"
+        header: 'Edit %{role}'
+      index:
+        link_name: 'Users & Customers'
+      new:
+        link_name: 'Add %{role}'
+        header: 'Add %{role}'
+      profile:
+        link_name: "%{role} Profile"
+      print:
+        link_name: Print
+      resend_confirmation_instructions:
+        link_name: Resend Confirmation
+      resend_password_instructions:
+        link_name: Resend Password Instruction
+      show:
+        link_name: '%{role} Details'
+        header: 'Overview'
+  asset:
+    image:
+      not_found: 'No Image Found'
+
+  datetime:
+    distance_in_words:
+      about_x_years:
+        one: 'an year'
+        other: '%{count} Years'
+      almost_x_years:
+        one: 'almost year'
+        other: '%{count} Years'
+
+  users:
+    account_confirmed: 'Account Confirmed'
+    total_amount_paid:
+      hint: '(you might have some payments pending clearance)'
+    total_balance_pending:
+      hint: '(you might have some payments pending clearance)'
+    total_unattached_balance:
+      hint: '(subject to clearance)'
+
+  sessions:
+    new:
+      otp_submit: 'Get OTP'
+      otp_resend: 'Resend OTP'
+      login_with_password_link: 'Login with password instead'
+      login_with_otp_link: 'Login with OTP instead'
+      sign_in: 'Sign In'
+      link:
+        pre_text: 'Already have an account?'
+        name: 'Login here'
+    titles:
+      heading1_html: 'Welcome to %{company_name}'
+      heading2_html: 'Test heading 2'
+    form:
+      heading_html: '<strong>Login</strong> to order food online'
+
+  registrations:
+    pre_text: 'Don’t have account ?'
+    new:
+      sign_up: 'Sign Up'
+    titles:
+      heading1_html: 'test'
+      heading2_html: test heading 2
+    form:
+      heading_html: '<strong>Register Now</strong> to order food online'

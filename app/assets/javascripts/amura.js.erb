@@ -1,0 +1,136 @@
+<% url = Rails.application.routes.url_helpers %>
+var Amura = {}
+String.prototype.titleize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
+Array.prototype.to_sentence = function() {
+  var arr = [];
+  if(this.length > 1){
+    _.each(this, function(elem){
+      arr.push((elem + "").titleize());
+    });
+    all_but_last = arr.slice(0, (this.length-1));
+    last = arr[arr.length - 1];
+    str = all_but_last.join(", ");
+    str += " and " + last;
+    if(typeof str === 'undefined' || str == null){
+      return "";
+    }
+    return str;
+  }else if(this.length == 1){
+    return ("" + this[0]).titleize();
+  }else{
+    return "";
+  }
+}
+Amura.global_success_handler = function(message){
+  if(message){
+    new Noty({text:message, type:"success", timeout: 5000}).show();
+  }
+};
+Amura.global_error_handler = function(errors){
+  if(errors){
+    if(typeof errors == "string"){
+      if(errors != ""){
+        new Noty({text:errors, type:"error"}).show();
+      }else{
+        new Noty({text:"There was some issue with the system. Please contact " + App.client.name + " support", type:"error"}).show();
+      }
+    }else if(typeof errors == "object"){
+      var message = "<ul style='text-align:left;'>";
+      _.each(errors, function(err){(message = message + "<li>" + err + "</li>")});
+      message = message + "</ul>";
+      new Noty({text:message, type:"error"}).show();
+    }
+  }
+};
+if($.noty){
+  $.noty.defaults = {
+    layout:'bottom',
+    type: 'success',
+    text: '', // can be html or string
+    dismissQueue: true, // If you want to use queue feature set this true
+    template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
+    animation: {
+      open: {height: 'toggle'},
+      close: {height: 'toggle'},
+      easing: 'swing',
+      speed: 500
+    },
+    timeout: 7000,
+    killer: false,
+    theme: 'bootstrap',
+    callback: {
+      onShow: function() {},
+      afterShow: function() {
+        if (this.options.buttons && this.options.override_timeout){
+          this.setTimeout(25000);
+        }
+      },
+      onClose: function() {},
+      afterClose: function() {}
+    },
+    maxVisible: 3,
+    closeWith: ['button']
+  };
+}
+
+Amura.removeParamFromURL = function(sourceURL, key) {
+  var rtn = sourceURL.split("?")[0], param, params_arr = [], queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+  if (queryString !== "") {
+    params_arr = queryString.split("&");
+    for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+      param = params_arr[i].split("=")[0];
+      if (param === key) {
+        params_arr.splice(i, 1);
+      }
+    }
+    rtn = rtn + "?" + params_arr.join("&");
+  }
+  if(rtn.endsWith("?")){
+    rtn = rtn.slice(0, (rtn.length-1));
+  }
+  return rtn;
+}
+
+Amura.getParamFromURL = function(url, key){
+  var urlParams = {};
+  var key = key || "";
+  url.replace(
+    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+    function($0, $1, $2, $3) {
+      urlParams[$1] = $3;
+    }
+  );
+  if(key){
+    return urlParams[key];
+  }else{
+    return urlParams;
+  }
+}
+
+Amura.formatMoney = function(string){
+  string = string || 0;
+  string = string.toString();
+  regex = /(\d)((\d)(\d{2}?)+)$/;
+  var split_at_decimal = string.split(".");
+  var s = split_at_decimal[0];
+  while (regex.test(s)){
+    s = s.replace(regex, '$1' + ',' + '$2');
+  }
+  if(split_at_decimal.length > 1){
+    s = s + "." + split_at_decimal[1];
+  }
+  return "&#8377; " + s;
+}
+
+Amura.readCookie = function(name){
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}

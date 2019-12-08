@@ -1,0 +1,82 @@
+// TODO: handle case if sell.do throws error, the form is hidden and nothing will happen
+<% url = Rails.application.routes.url_helpers %>
+var OtpBasedLogin = (function(){
+  var handleSendOtpSuccess = function(elem, data){
+    $(elem).find('[name="user[login]"]').closest(".form-group").attr("hidden", "hidden");
+    $(elem).find('[name="user[login_otp]"]').closest(".form-group").removeAttr("hidden");
+    $(elem).find('[name="user[login_otp]"]').focus();
+    $(elem).find('.resend-otp').parent().removeClass("d-none");
+    $(elem).find('.resend-otp').attr("disabled", "disabled");
+    $(elem).removeAttr("data-type").removeAttr("data-remote");
+    setTimeout(function(){
+      if(data.confirmed){
+        $(elem).find('input[type="submit"]').val("Log In").attr("data-disable-with", "Logging in");
+      }else{
+        $(elem).find('input[type="submit"]').val("Verfiy your Account").attr("data-disable-with", "Verifying & Logging you in");
+      }
+    }, 200);
+
+    setTimeout(function(){
+      $(elem).find('.resend-otp').removeAttr("disabled");
+    },15000);
+
+    $(elem).attr("action", "<%= url.user_session_path %>");
+  };
+
+  var handleSendOtpError = function(xhr, data){
+    if(xhr.status == 201){
+      new Noty({
+        text: "Invalid Phone Number",
+        timeout: 7000,
+        type: 'error'
+      }).show();
+    }else if(xhr.status == 422){
+      new Noty({
+        text: data["errors"],
+        timeout: 7000,
+        type: 'error'
+      }).show();
+    }
+  }
+
+  var init = function(){
+    FormInitializer.init($("#standard_login_form"));
+    FormInitializer.init($("#otp_user_form"));
+
+    $(".toggle_signin_form").click(function(e){
+      var target = $(e.currentTarget).data("target");
+      $("form").addClass("d-none");
+      $(target).removeClass("d-none");
+    })
+
+    $(document).on("ajax:success", '#otp_user_form', function(evt){
+      var detail = evt.detail;
+      var data = detail[0], status = detail[1], xhr = detail[2];
+      handleSendOtpSuccess($(this), data);
+    });
+
+    $(document).on("ajax:error", '#otp_user_form', function(evt){
+      var detail = evt.detail;
+      var data = detail[0], status = detail[1], xhr = detail[2];
+      handleSendOtpError(xhr, data);
+    });
+    $('#otp_user_form .resend-otp').click(function(e){
+      $.ajax({
+        url: "/users/otp",
+        data: $('#otp_user_form').serializeArray(),
+        dataType: "json",
+        type: "post",
+        success: function(data, status, xhr){
+          handleSendOtpSuccess($('#otp_user_form'), data);
+        },
+        error: function(xhr, status, data){
+          handleSendOtpError(xhr, xhr.responseJSON);
+        }
+      })
+    })
+  };
+
+  return {
+    init: init
+  }
+})();

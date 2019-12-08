@@ -1,0 +1,23 @@
+<section class="auth login-page pb-5">
+  <div class="container no-pd">
+    <div class="col-lg-5 col-xs-12 col-md-12 col-sm-12 no-pd">
+      <div class="login-form-wrapper pt-5">
+        <h2 class="font-weight-bold text-success">Create Password</h2>
+        <p class="p-style">Please choose a password of your choice and confirm your account</p>
+
+        <%= simple_form_for(resource, as: resource_name, url: update_user_confirmation_path, method: :put, html: { novalidate: false, class: 'validate-form pb-5', id: 'activation-form', role: :form }) do |f| %>
+
+
+        <%= hidden_field_tag :confirmation_token, params[:confirmation_token] %>
+        <%= hidden_field_tag :manager_id, params[:manager_id] %>
+
+        <% if @requires_password %>
+          <%= f.input :password, autofocus: true, tabindex: "1", required: true %>
+          <%= f.input :password_confirmation, tabindex: "2", required: true %>
+
+          <div class="form-group">
+            <%= f.submit "Activate", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      <% end %>
+<%= render "devise/shared/links" %>

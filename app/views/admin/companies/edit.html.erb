@@ -1,0 +1,3 @@
+<% _hash = {"data-resource-type": global_labels['company'], "data-type": "json"} %>
+<% _url = admin_company_path(request_type: @company.class.model_name.element, id: @company.id) %>
+<%= render 'form', hash: _hash, url: _url %>

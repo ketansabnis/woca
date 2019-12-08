@@ -1,0 +1,32 @@
+<% resource_name = resource_name || :user %>
+<div class="small">
+  <%- if defined?(devise_mapping) %>
+    <%- if devise_mapping.registerable? && !controller_name.in?(%w(registrations sessions)) %>
+      <%= link_to "Sign up", register_path, data:{event_category: 'Section', event_action: 'Click', event_name: 'Sign up'}, class: "a-style opacity-5" %><br/>
+    <% end -%>
+
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name),  data:{event_category: 'Section', event_action: 'Click', event_name: 'Forgot your password?'}, class: "a-style opacity-5" %><br/>
+    <% end -%>
+
+    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+      <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), data:{event_category: 'Section', event_action: 'Click', event_name: 'Didnt receive unlock instructions'}, class: "a-style opacity-5" %><br/>
+    <% end -%>
+
+    <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+      <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name),  data:{event_category: 'Section', event_action: 'Click', event_name: 'Didnt receive unlock instructions'}, class: "a-style opacity-5" %><br/>
+    <% end -%>
+
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "a-style opacity-5" %><br/>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+  <%- if controller_name != 'sessions' %>
+    <div class="signup-btn-set mt-3">
+      <div class="p-style opacity-5"><%= t("sessions.new.link.pre_text") %></div><%= link_to t("sessions.new.link.name"), new_session_path(resource_name), data:{event_category: 'Section', event_action: 'Click', event_name: 'Log In'}, class: "p-style opacity-5 fn-500" %><br/>
+    </div>
+  <% end -%>
+
+</div>

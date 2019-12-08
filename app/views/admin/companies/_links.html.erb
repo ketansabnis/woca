@@ -1,0 +1,6 @@
+<% if policy([:admin, company]).show? && !(params[:controller] == 'admin/companies' && params[:action] == 'show') %>
+  <%= link_to 'Details', admin_company_path(request_type: company.class.model_name.element, id: company.id), class: 'dropdown-item' %>
+<% end %>
+<% if Admin::CompanyPolicy.new(current_user, company).edit? %>
+  <%= link_to t("helpers.edit.link_name", model: company.model_name.human), edit_admin_company_path(company, request_type: company.class.model_name.element), class: 'modal-remote-form-link dropdown-item' %>
+<% end %>

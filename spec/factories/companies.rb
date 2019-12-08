@@ -15,6 +15,7 @@ FactoryBot.define do
 
         create :user, company: company, role: 'company_admin'
         create_list :user, 3, company: company, role: 'user'
+        create_list :restaurant, 2, company: company
       end
     end
   end

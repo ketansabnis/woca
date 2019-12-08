@@ -1,0 +1,205 @@
+.asset{
+  width: 120px;
+  height: 95px;
+  float: left;
+  margin: 0 3px 12px 0;
+  padding-bottom: 2px;
+  cursor: default;
+  overflow: hidden;
+  text-align:center;
+  position: relative;
+}
+
+.asset-inner:hover{
+  border:0 solid;
+}
+.asset-actions{
+  display:none;
+}
+.asset-actions .asset-preview, .asset-actions .asset-download, .asset-actions .asset-edit, .asset-actions .asset-select,.asset-delete{
+  color:#666 !important;
+  font-size:14px;
+  text-decoration:none;
+  padding:5px;
+  cursor: pointer;
+}
+.asset-actions .asset-select{
+  left:0;
+  position: absolute;
+  bottom: 0;
+  background: #3e9dda;
+  color: #fff;
+  width: 100%;
+}
+.asset:hover > div.asset-actions{
+  width: 120px;
+  height: 52px;
+  margin: 0 3px 12px 0;
+  padding-top: 15px;
+  padding-left: 15px;
+  cursor: default;
+  text-align:center;
+  position:absolute;
+  top:0;
+  z-index:100;
+  background: #e2f0f1;
+
+  display:block;
+}
+.asset:hover > div.asset-actions.selectable{
+  padding-top:28px;
+}
+.asset-inner{
+  width: 52px;
+  height: 52px;
+  margin: 1px auto;
+  padding: 2px;
+  position: relative;
+}
+.asset-icon{
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  background: asset-url("file-icons.png") 0 0 no-repeat;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.asset-icon-image{
+  background-position:0 -250px;
+}
+.asset-icon-audio {
+  background-position: 0 -300px;
+}
+.asset-icon-video, .asset-icon-flash-video {
+  background-position: 0 -350px;
+}
+.asset-icon-pdf {
+  background-position: 0 -450px;
+}
+.asset-blur {
+  opacity: 0.5;
+}
+
+.progress-height {
+  height: 5px !important;
+}
+
+.asset-icon-ms-excel, .asset-icon-msword, .asset-icon-vnd-ms-excel,
+.asset-icon-vnd-ms-excel-addin-macroEnabled-12, .asset-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.asset-icon-vnd-ms-excel-sheet-macroEnabled-12, .asset-icon-vnd-ms-excel-template-macroEnabled-12,
+.asset-icon-vnd-ms-office, .asset-icon-vnd-ms-powerpoint,
+.asset-icon-vnd-ms-powerpoint-addin-macroEnabled-12, .asset-icon-vnd-ms-powerpoint-presentation-macroEnabled-12,
+.asset-icon-vnd-ms-powerpoint-slide-macroEnabled-12, .asset-icon-vnd-ms-powerpoint-slideshow-macroEnabled-12,
+.asset-icon-vnd-ms-powerpoint-template-macroEnabled-12,
+.asset-icon-vnd-ms-word, .asset-icon-vnd-ms-word-document-macroEnabled-12,
+.asset-icon-vnd-ms-word-template-macroEnabled-12, .asset-icon-vnd-oasis-opendocument-chart,
+.asset-icon-vnd-oasis-opendocument-database, .asset-icon-vnd-oasis-opendocument-formula,
+.asset-icon-vnd-oasis-opendocument-graphics, .asset-icon-vnd-oasis-opendocument-graphics-template,
+.asset-icon-vnd-oasis-opendocument-image, .asset-icon-vnd-oasis-opendocument-presentation,
+.asset-icon-vnd-oasis-opendocument-presentation-template,
+.asset-icon-vnd-oasis-opendocument-spreadsheet, .asset-icon-vnd-oasis-opendocument-spreadsheet-template,
+.asset-icon-vnd-oasis-opendocument-text, .asset-icon-vnd-oasis-opendocument-text-master,
+.asset-icon-vnd-oasis-opendocument-text-template, .asset-icon-vnd-oasis-opendocument-text-web,
+.asset-icon-vnd-openofficeorg-extension, .asset-icon-vnd-openxmlformats-officedocument-presentationml-presentation,
+.asset-icon-vnd-openxmlformats-officedocument-presentationml-slide,
+.asset-icon-vnd-openxmlformats-officedocument-presentationml-slideshow,
+.asset-icon-vnd-openxmlformats-officedocument-presentationml-template,
+.asset-icon-vnd-openxmlformats-officedocument-spreadsheetml-sheet,
+.asset-icon-vnd-openxmlformats-officedocument-spreadsheetml-template,
+.asset-icon-vnd-openxmlformats-officedocument-wordprocessingml-document,
+.asset-icon-vnd-openxmlformats-officedocument-wordprocessingml-template {
+  background-position: 0 -500px
+}
+
+.asset-icon-plain, .asset-icon-text {
+  background-position: 0 -200px
+}
+
+.asset-icon-html {
+  background-position: 0 -550px
+}
+.asset-icon-css {
+  background-position: 0 -600px
+}
+
+.asset-icon-javascript, .asset-icon-x-javascript {
+  background-position: 0 -650px
+}
+.asset-icon-xml {
+  background-position: 0 -1000px
+}
+
+.asset-icon-zip, .asset-icon-x-zip, .asset-icon-x-7z-compressed {
+  background-position: 0 -1050px
+}
+
+.asset-icon-x-gzip, .asset-icon-x-tar {
+  background-position: 0 -1100px
+}
+
+.asset-icon-x-bzip, .asset-icon-x-bzip2 {
+  background-position: 0 -1150px
+}
+
+.asset-icon-x-rar, .asset-icon-x-rar-compressed {
+  background-position: 0 -1200px
+}
+
+.asset-icon-x-shockwave-flash {
+  background-position: 0 -1250px
+}
+
+.asset-name{
+  text-align: center;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  margin: 3px 1px 0;
+  padding: 1px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+.asset-loading{
+  width: 70px;
+  height: 5px;
+  margin: auto;
+  margin-top: 5px;
+}
+.uploaded_assets_container:after{
+  clear:both;
+}
+.assets_accordian .panel-default{
+  border:0;
+}
+.asset-select-input{
+  display:none;
+}
+.asset.selected:after{
+  font-size: 26px;
+  position: absolute;
+  top: 10px;
+  left: 43%;
+  color: #000;
+}
+.asset.selected:hover > div.asset-actions{
+  display: none;
+}
+.asset_search_term_btn{
+  padding:6px 8px !important;
+}
+.asset_search_term_btn a.i{
+  color:#fff !important;
+}
+.upload-completed-message{
+  font-size: 12px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 25%;
+  background: #bde0f8;
+  color: #000;
+}

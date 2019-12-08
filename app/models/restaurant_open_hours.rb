@@ -9,11 +9,11 @@ class RestaurantOpenHours
     field :closing_hour, type: Integer, default: 23
     field :closing_minute, type: Integer, default: 59
 
-    validates :day, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 7 }
-    validates :opening_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 23 }
-    validates :closing_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 23 }
-    validates :opening_minute, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 59 }
-    validates :closing_minute, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 59 }
+    validates :day, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 7 }
+    validates :opening_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }
+    validates :closing_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }
+    validates :opening_minute, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 59 }
+    validates :closing_minute, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 59 }
     validate :opening_and_closing_hour
 
     belongs_to :restaurant

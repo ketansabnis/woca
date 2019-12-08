@@ -1,0 +1,53 @@
+<%= form_for @company, url: url, remote: true, html: {class: 'modal-remote-form validate-form', "data-resource-type": global_labels['companies'], "data-type": "json"}, data: hash do |f| %>
+  <div class="modal fade right fixed-header-footer" role="dialog" id="modal-remote-form-inner">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-cd white">
+          <h3 class="title"><%= t("controller.companies.#{action_name}.header", company_name: @company.name) %></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name, class: 'label-required' %>
+            <%= f.text_field :name, class: 'form-control', autofocus: true, required: 'required', disabled: (policy([current_user.role.to_sym, @company]).editable_field?("name") ? false : true) %>
+          </div>
+          <div class="form-group">
+            <%= f.label :industry, class: 'label-required' %>
+            <%= f.text_field :industry, class: 'form-control', required: 'required', disabled: (policy([current_user.role.to_sym, @company]).editable_field?("industry") ? false : true) %>
+          </div>
+          <% if policy([current_user.role.to_sym, @company]).editable_field?("status") %>
+            <div class="form-group">
+              <%= f.label :status, class: 'label-required' %>
+              <%= f.select :status, Company.available_statuses.collect{|x| [ x[:text], x[:id]] }, {}, {prompt: "Select", class: "selectize", disabled: (policy([current_user.role.to_sym, @company]).editable_field?("status") ? false : true)} %>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <%= f.label :preferred_login, class: 'label-required' %>
+            <%= f.select :preferred_login, Company.available_preferred_logins.collect{|x| [x[:text], x[:id]]}, {}, class: 'selectize', required: 'required', disabled: (policy([:admin, @company]).editable_field?("preferred_login") ? false : true) %>
+          </div>
+          <div class="form-group">
+            <%= f.label :enable_communication, class: 'label-required' %><br/>
+            <%= f.fields_for :enable_communication do |ec_form| %>
+              <% f.object.enable_communication.each do |k, v| %>
+                <div class="form-check form-check-inline">
+                  <%= ec_form.check_box k, {class: "form-check-label", checked: v}, true %>
+                  <%= ec_form.label :k, "Enable #{k}", class: "form-check-label ml-1" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Submit", class: 'btn btn-primary', id: "submit_request", data:{event_category: 'Section', event_action: 'Click', event_name: 'Update Company'}  %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= javascript_tag do %>
+$(document).ready(function(){
+  FormInitializer.init($('.validate-form'));
+});
+<% end %>

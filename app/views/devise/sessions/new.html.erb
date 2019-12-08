@@ -1,0 +1,95 @@
+<% if current_company.preferred_login == "phone" && current_company.sms_enabled?
+  otp_signin_class = ""
+  username_signin_class = "d-none"
+else
+  otp_signin_class = "d-none"
+  username_signin_class = ""
+end %>
+<section class="pb-5">
+  <div class="container p-0">
+    <div class="col-lg-5 col-xs-12 col-md-12 col-sm-12 p-0">
+      <div class="pt-5">
+        <h1 class="mt-0"><%= t('sessions.titles.heading1_html', company_name: current_restaurant.name) %></h1>
+        <p class="p-style mt-0"><%= t('sessions.titles.heading2_html') %></p>
+        <p class="p-style"><%= t('sessions.form.heading_html') %></p>
+        <%= simple_form_for(resource, as: resource_name, url: users_otp_path, method: :post, authenticity_token: true, remote: true, html: { novalidate: false, class: "validate-form #{otp_signin_class}", id: 'otp_user_form', data: { type: :json }, autocomplete: 'off' }) do |f| %>
+
+          <%= f.phone_field :login, autofocus: true, class: 'form-control', placeholder: t('mongoid.attributes.user.phone'), id: 'user_login_phone', autocomplete: false %>
+
+          <div class="form-group" hidden>
+            <%= f.label :login_otp %>
+            <%= f.number_field :login_otp, class: 'form-control', maxlength: resource_class.otp_length, minlength: resource_class.otp_length, autocomplete: false %>
+          </div>
+
+          <div class="col-lg-12 pl-0 pr-0 pt-3 pb-3">
+            <%= f.submit t('sessions.new.otp_submit'), class: 'btn btn-primary',  data:{event_category: 'Section', event_action: 'Click', event_name: t('sessions.new.otp_submit') } %>
+          </div>
+          <div class="d-none">
+            <a href="javascript:;" class="resend-otp small pt-3" data-resend-time="<%= User.otp_resend_wait_time %>", data-max-limit="<%= User.otp_resend_max_limit %>" data-counter=0><%= t('sessions.new.otp_resend') %></a>
+            <br>
+          </div>
+          <a href="javascript:;" class="toggle_signin_form d-block d-md-inline float-md-left pr-0" data-target="#standard_login_form"><%= t('sessions.new.login_with_password_link') %></a><br/>
+        <% end %>
+
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'validate-form ' + username_signin_class, id: "standard_login_form", autocomplete: 'off' }) do |f| %>
+          <% if current_company.preferred_login == "phone" %>
+            <div class="form-group">
+              <%= f.label :phone %>
+              <%= f.phone_field :login, autofocus: true, class: 'form-control', placeholder: t('mongoid.attributes.user.phone'), id: 'user_login_phone', autocomplete: false %>
+            </div>
+          <% else %>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :login, autofocus: true, class: 'form-control', placeholder: t('mongoid.attributes.user.email'), autocomplete: false %>
+            </div>
+          <% end %>
+          <div class="form-group" id='public_key' data-value="<%= @public_key %>" >
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: false, class: 'form-control', placeholder: t('mongoid.attributes.user.password'), data: { encrypt: true } %>
+          </div>
+          <% if devise_mapping.rememberable? -%>
+            <div class="radioStyle col-lg-12">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me, t("mongoid.attributes.user.remember_me").html_safe %>
+            </div>
+          <% end -%>
+          <div class="signin-btn col-lg-12 pl-0 pr-0 pt-4 pb-3">
+            <%= f.submit t("sessions.new.sign_in"), class: 'btn btn-primary',  data:{event_category: 'Section', event_action: 'Click', event_name: 'Log In'} %>
+          </div>
+          <% if current_company.sms_enabled? %>
+            <a href="javascript:;" class="toggle_signin_form d-block d-md-inline float-md-left pr-0" data-target="#otp_user_form"><%= t('sessions.new.login_with_otp_link') %></a>
+            <br>
+          <% end %>
+        <% end %>
+        <%=render "devise/shared/links" %>
+        <div class="signup-btn-set mt-4">
+          <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+            <div class="p-style opacity-5"><%= t("registrations.pre_text") %></div><%= link_to t("registrations.new.sign_up"), register_path, data:{event_category: 'Section', event_action: 'Click', event_name: 'Sign up'}, class: "p-style fn-500" %><br/>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= javascript_tag do %>
+  $(document).ready(function(){
+    <% if params[:login].present? && current_company.preferred_login == "phone" && params[:force].to_s == "true" %>
+    $("#otp_user_form").submit();
+    <% end %>
+    OtpBasedLogin.init();
+    $('form').submit(function( event ) {
+      var encrypt = new JSEncrypt();
+      debugger;
+      $('[data-encrypt]').each(function(){
+        var unencrypted = $(this);
+        encrypt.setKey($('#public_key').attr('data-value'));
+        var encrypted = encrypt.encrypt(unencrypted.val());
+        if(encrypted) {
+          unencrypted.val(encrypted);
+        }
+      })
+    });
+  });
+<% end %>

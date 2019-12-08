@@ -34,6 +34,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
+  # gives the documentation for standard ruby libary in pry
+  gem 'pry-doc'
 end
 
 group :development do
@@ -78,6 +81,7 @@ gem 'mongoid', '~> 6.1.0'
 gem 'mongoid-autoinc'
 gem 'devise'
 gem 'active_model_otp'
+gem 'rotp'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'pundit'
 gem 'sidekiq'
@@ -99,6 +103,11 @@ gem 'bootstrap-email'
 gem 'mailgun-ruby'
 gem 'humanize', require: 'humanize'
 gem 'mongoid-autoinc'
+gem 'simple_form'
+gem "font-awesome-sass"
+gem 'active_link_to'
+gem 'request_store'
+
 
 group :test, :development do
   gem 'faker', github: 'stympy/faker'

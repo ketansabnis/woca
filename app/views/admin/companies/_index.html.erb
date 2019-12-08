@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th><%= Company.human_attribute_name('name_industry') %></th>
+        <th><%= Company.human_attribute_name('company_code_status') %></th>
+        <th><%= Company.human_attribute_name('company_users_restaurants') %></th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.name %><p class="small"><%= company.industry %></p></td>
+        <td><%= company.company_code %><p class='small'><%= Company.human_attribute_name(company.status) %></p></td>
+        <td><%= company.users.count %><p class='small'><%= Company.human_attribute_name('restaurants') %>: <%= company.restaurants.count %></p></td>
+        <td class="text-right">
+          <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu dropdown-menu-right border py-0">
+              <div class="bg-white py-2">
+                <%= render 'links', company: company %>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @companies, list_classes: %w(pagination justify-content-center) %>

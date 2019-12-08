@@ -145,9 +145,9 @@ var dialog = renderer.create('<div class="modal" aria-hidden="false" tabindex="-
         '<div class="modal-dialog">',
         '  <div class="modal-content">',
         (options.title
-            ? '    <div class="modal-header">' +
-                '      <h4 class="modal-title">' + options.title + '</h4>' +
-                '      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            ? '    <div class="modal-header bg-gradient-cd white">' +
+                '      <h4 class="title">' + options.title + '</h4>' +
+                '      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="white">&times;</span></button>' +
                 '    </div>' : ''),
         '    <div class="modal-body">' + options.body + '</div>',
         (options.footer
@@ -3751,7 +3751,7 @@ var Editor = /** @class */ (function () {
             })(idx);
             this.context.memo('help.formatH' + idx, this.lang.help['formatH' + idx]);
         }
-        
+
         this.insertParagraph = this.wrapCommand(function () {
             _this.typing.insertParagraph(_this.editable);
         });
